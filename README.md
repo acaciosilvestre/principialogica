@@ -1,0 +1,2 @@
+# principialogica
+propositional logic interpreter
