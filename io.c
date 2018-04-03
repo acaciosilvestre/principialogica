@@ -1,15 +1,8 @@
-// Mon Jan 29 19:43:01 BRST 2018
-// Mon Jan 29 19:23:07 BRST 2018
-/*
- *   io.c : pli_read, pli_open, readname, read_number
- *        : fd
- */
 #include "pli.h"
 #include "io.h"
 
-
-/* 1.
- * pli_read: read a single char from current fd
+/* 
+ * 1. pli_read: read a single char from current fd
  */
 int pli_read()
 {
@@ -21,9 +14,8 @@ int pli_read()
     return(read(fd,&c,1)?c:EOF);
 }
 
-/* 2.
- * pli_open: open fname. If success, fd is set.
- * If fails, return fp=NULL.
+/* 
+ * 2. pli_open: open fname. Return fd or NULL.
  */
 FILE *pli_open(char *fname)
 {
@@ -39,35 +31,33 @@ FILE *pli_open(char *fname)
     return(fp);
 }
 
-/* 3.
- * TIPO: return 'a' (char) or '0' (digit)
+/* 
+ * 3. TYPE: return 'a' (char) or '0' (digit)
  */
-int TIPO(int c)
+int TYPE(int c)
 {
-
     if((c>='a' && c<='z') || (c>='A' && c<='Z'))
         return('a');
     else if (c>='0' && c<='9')
         return('0');
-
     else
         return(c);
 }
 
-/* 4.
- * readname: read from current fp and copy symbol name in 
- * pointer p appending '\0'.
+/* 
+ * 4. readname: read from current fp and copy symbol name in 
+ *    pointer p appending '\0'.
  */
 int readname(char *p,int lim)
 {
     int c,t;
-    if(TIPO(c=*p++=pli_read())!='a'){
+    if(TYPE(c=*p++=pli_read())!='a'){
         *p='\0';
     return(c);
     }
 
     while(--lim>0){
-        t=TIPO(c=*p++=pli_read());
+        t=TYPE(c=*p++=pli_read());
         if(t!='a' && t!='0'){
             ungtc(c);
             break;
@@ -77,10 +67,10 @@ int readname(char *p,int lim)
     return('a');
 }
 
-/* 5.
- * read_number: read next number.
+/* 
+ * 5. read_number: read next number from fp.
  */
-SGNLG read_number(char *p)
+BASETYPE read_number(char *p)
 {
     long v;
     int i,c,j;
@@ -100,30 +90,15 @@ SGNLG read_number(char *p)
         else
             return(VERYLARGEINPUT);
         }        
-    ungetbuf[0]=c;
+    ungtc(c);
     *(p-1)='\0';
 
-/*
-    if(v<=255)
-	printf("CHAR\n");
-    if(v>=256 && v<=65535)
-	printf("SHORT\n");
-    if(v>=65536)
-	printf("INTEGER\n");
-*/
     return(v*i);
 }
 
-/* 6. 
- * ungetc: unget last char.
- */
-void ungtc(int c)
-{
-    ungetbuf[0]=c;
-}
 
-/* 7.
- * int2str: convert integer to string.
+/* 
+ * 6. int2str: convert integer to string.
  */
 void int2str(int n,char *buf)
 {
@@ -144,8 +119,8 @@ void int2str(int n,char *buf)
     invert(buf);
 }
 
-/* 8.
- * invert: invert string in s
+/* 
+ * 7. invert: invert string in s
  */
 void invert(char *s)
 {

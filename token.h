@@ -1,3 +1,4 @@
+/* Sun Mar 4 07:20:40 -03 2018 */
 // Mon Jan 29 19:43:01 BRST 2018
 // Mon Jan 29 19:23:07 BRST 2018
 #include "register.h" 
@@ -110,21 +111,6 @@ enum {_PRECEDENCE1=1, _PRECEDENCE2};
 
 #define MAXOPERANDS	 4		/* max number of current operands  <=3 */
 #define MAXOPERATORS	 3		/* max number of current operators <=2 */
-
-typedef struct{
-	char opn:1;	/* 1 */
-	char opr:1;	/* 2 */
-	char del:1; 	/* 4 */
-	char num:1;	/* 8  */
-	char p1;	/* 16  */
-	char op;        /* 32 */
-}_TKFLG,*_TKFLGP;
-
-typedef struct{
-	char int_t;
-	_TKFLGP tkflgp;
-}_TOKEN,*_TOKENP;
-
 
 typedef struct _token{
 	char int_t;				/* token char */

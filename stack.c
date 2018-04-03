@@ -1,21 +1,21 @@
+/* Sun Mar 4 07:20:40 -03 2018 */
 // Mon Jan 29 19:43:01 BRST 2018
 // Mon Jan 29 19:23:07 BRST 2018
 #include "pli.h"
-#include "stack.h"
 
-static SGNLG intstack[STACK_LEN];
+static BASETYPE intstack[STACK_LEN];
 static int oprtstack[STACK_LEN];
-SGNLG intsp = 0;
+BASETYPE intsp = 0;
 int  oprtsp = 0;
 
 
-SGNLG push(SGNLG n)
+BASETYPE push(BASETYPE n)
 {
     if(intsp<STACK_LEN)
 	return(intstack[intsp++]=n);
 }
 
-SGNLG pop()
+BASETYPE pop()
 {
     if(intsp>0)
 	return(intstack[--intsp]);
