@@ -1,6 +1,8 @@
 #include "pli.h"
 #include "io.h"
 
+#define tipo(x)	((x>='a' && x<='z') || (x>='A' && x<='Z'))?'a':\
+				(x>='0' && x<='9')?'0':x
 /* 
  * 1. pli_read: read a single char from current fd
  */
@@ -12,7 +14,7 @@ int pli_read()
         ungetbuf[0]=0;
         return(c);
     }
-    return(read(fd,&c,1)?c:EOF);
+    return(pli_getc());
 }
 
 
@@ -33,20 +35,6 @@ FILE *pli_open(char *fname)
     return(fp);
 }
 
-/* 
- * 3. TYPE: return 'a' (char) or '0' (digit)
- */
-
-int TYPE(int c)
-{
-    if((c>='a' && c<='z') || (c>='A' && c<='Z'))
-        return('a');
-    else if (c>='0' && c<='9')
-        return('0');
-    else
-        return(c);
-}
-
 
 /* 
  * 4. readname: read from current fp and copy symbol name in 
@@ -55,14 +43,14 @@ int TYPE(int c)
 int readname(char *p,int lim)
 {
     int c,t;
-    if(TYPE(c=*p++=pli_read())!='a'){
+    if(isalpha(c=*p++=pli_read())==0){
         *p='\0';
     	return(c);
     }
 
     while(--lim>0){
-        t=TYPE(c=*p++=pli_read());
-        if(t!='a' && t!='0'){
+        t=isalnum(c=*p++=pli_read());
+        if(t==0){
             ungtc(c);
             break;
         }
