@@ -4,6 +4,7 @@
 /* 
  * 1. pli_read: read a single char from current fd
  */
+
 int pli_read()
 {
     char c;
@@ -14,26 +15,28 @@ int pli_read()
     return(read(fd,&c,1)?c:EOF);
 }
 
+
 /* 
  * 2. pli_open: open fname. Return fd or NULL.
  */
+
 FILE *pli_open(char *fname)
 {
     FILE *fp;
-
-    if(fname=="stdin"){
+    if(strcmp(fname,"stdin")==0){
         fp=stdin;
         fd=fp->_file;        
     }else{
-	if((fp=fopen(fname,"r"))!=NULL)
+	    if((fp=fopen(fname,"r"))!=NULL)
             fd=fp->_file;
-        }
+    }
     return(fp);
 }
 
 /* 
  * 3. TYPE: return 'a' (char) or '0' (digit)
  */
+
 int TYPE(int c)
 {
     if((c>='a' && c<='z') || (c>='A' && c<='Z'))
@@ -44,6 +47,7 @@ int TYPE(int c)
         return(c);
 }
 
+
 /* 
  * 4. readname: read from current fp and copy symbol name in 
  *    pointer p appending '\0'.
@@ -53,7 +57,7 @@ int readname(char *p,int lim)
     int c,t;
     if(TYPE(c=*p++=pli_read())!='a'){
         *p='\0';
-    return(c);
+    	return(c);
     }
 
     while(--lim>0){
@@ -70,6 +74,7 @@ int readname(char *p,int lim)
 /* 
  * 5. read_number: read next number from fp.
  */
+
 BASETYPE read_number(char *p)
 {
     long v;
@@ -92,20 +97,18 @@ BASETYPE read_number(char *p)
         }        
     ungtc(c);
     *(p-1)='\0';
-
     return(v*i);
 }
-
 
 /* 
  * 6. int2str: convert integer to string.
  */
+
 void int2str(int n,char *buf)
 {
     int i,sgn;
-
     if((sgn=n)<0)
-	n=-n;
+	    n=-n;
  
     i=0;
     do{
@@ -113,7 +116,7 @@ void int2str(int n,char *buf)
     }while((n/=10)>0);
 
     if(sgn<0)
-	buf[i++]='-';
+	    buf[i++]='-';
 
     buf[i]='\0';
     invert(buf);
@@ -122,6 +125,7 @@ void int2str(int n,char *buf)
 /* 
  * 7. invert: invert string in s
  */
+
 void invert(char *s)
 {
     int c,i,j;

@@ -20,6 +20,10 @@ int main(int argc,char *argv[])
     /* Initialization */
     signal(SIGUSR1,sigh);				
     parseargs(argc,argv);
+    reg("x","85");
+    reg("y","51");
+    reg("z","15");
+    
     if(f.d==1)
         printf("1. main\n");
 
@@ -38,13 +42,13 @@ int main(int argc,char *argv[])
 		    	printf("%o\n",ctl.sp->r);
 			else
 		    	printf("%d\n",ctl.sp->r);
-	   	}
+	    }
 	}
 }
 
 int sigh()
 {
-        printf("error %s\n",geterrmsg(err_num));
-        exit(1);
+    printf("error %s\n",geterrmsg(err_num));
+    exit(1);
 }
 
