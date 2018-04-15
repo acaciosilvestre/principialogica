@@ -10,7 +10,6 @@ typedef long       	BASETYPE;
 /* 1. Function Prototypes */
 int pli_read();
 int readname(char *p,int lim);
-int TYPE(int c);
 void int2str(int n,char *buf);
 void invert(char *s);
 BASETYPE read_number(char *p);
