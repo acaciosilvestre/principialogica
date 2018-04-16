@@ -28,7 +28,7 @@ BASETYPE push(BASETYPE n);
 #define MAXLINE	80
 #define	WITH_OPTIONS	1
 #define	NO_OPTIONS	0
-#define	__EOI	'\n'
+#define	__EOI	65536 
 #define	___EOI	2828
 #define STACK_LEN	1024
 #define TAMHASH 100
@@ -39,7 +39,7 @@ BASETYPE push(BASETYPE n);
 #define X_Y_Z	322	/* X or Y or Z */
 /* Global Macros */
 #define NOT2(X)          (1-X)
-#define NOT(X)		(-X-1)
+#define NOT(X)			(-X-1)
 #define AND(X,Y)        ((X) & (Y))
 #define OR(X,Y)         ((X) | (Y))
 #define IMP(X,Y)        ((NOT(X)) | (Y))
