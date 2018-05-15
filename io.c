@@ -1,20 +1,55 @@
 #include "pli.h"
 #include "io.h"
-
-#define tipo(x)	((x>='a' && x<='z') || (x>='A' && x<='Z'))?'a':\
-				(x>='0' && x<='9')?'0':x
+#include "token.h"
+#define pli_isnumber(x)	x=='-'?1:isdigit(x)
 /* 
  * 1. pli_read: read a single char from current fd
  */
+static int cmdbuf_p=0;
+extern char mainbuf[];
+extern OPTIONS f;
+
+int read_number2(char *buf)
+{
+    int c,retval;
+    c=*buf++=pli_read();
+    if(pli_isnumber(c)){
+    	while(isdigit(c=*buf++=pli_read()))
+	;
+    retval=1;
+    }
+    else
+    {
+        retval=0;
+    }
+    ungtc(c);
+    *(buf-1)='\0';
+    return(retval);
+}
+
 
 int pli_read()
 {
-    char c;
+    char c;								/* common part */
     if((c=ungetbuf[0])!=0){
         ungetbuf[0]=0;
         return(c);
     }
-    return(pli_getc());
+    
+    if(f.d==1){
+	    c=mainbuf[cmdbuf_p];
+	    if(c!=NULL){
+	    	++cmdbuf_p;
+    		return(c);	
+    	}
+    	else{
+       		mainbuf[0]='\0';
+    		return(EOF);
+		}
+		
+    }
+	if(f.d==0)
+    	return(pli_getc());
 }
 
 

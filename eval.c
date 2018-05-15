@@ -68,7 +68,9 @@ while(!eoi){
             switch(ret_tk->_cls){	
 				case _NUMERIC:     	
 	    	    	ungtc(c);       
-        	    	number=read_number(lbuf); 
+	    	    	read_number2(lbuf);
+        	    	//number=read_number(lbuf); 
+        	    	number=atoll(lbuf);
                     if(denial){ 
             	        not(number);
                         denial=0; /* clear flag */
@@ -115,7 +117,7 @@ while(!eoi){
                     }
                     else{
                         ungtc(c); 	
-			    	    attrib=1;   
+			    	    attrib=1;
                     }              	
                     break;
                 }

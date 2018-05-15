@@ -33,6 +33,7 @@ BASETYPE push(BASETYPE n);
 #define STACK_LEN	1024
 #define TAMHASH 100
 /* configurations */
+#define X	100
 #define XY	211		/* X and Y */
 #define X_Y	212		/* X or Y */
 #define X_YZ	321	/* X or Y and Z */

@@ -22,13 +22,13 @@ int parseargs(int argc,char *argv[])
                               f.q=1;
                         break;
 
-			case 'd':
-			      f.d=1;
-			break;
+						case 'd':
+			      			f.d=1;
+						break;
 
-			case 'o':
-			      f.o=1;
-			break;
+						case 'o':
+					      f.o=1;
+						break;
 
                         default:
                         break;
