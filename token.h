@@ -1,7 +1,7 @@
 /* Sun Mar 4 07:20:40 -03 2018 */
-// Mon Jan 29 19:43:01 BRST 2018
-// Mon Jan 29 19:23:07 BRST 2018
-#include "register.h" 
+// Mon Jan 29 19: 43:01 BRST 2018
+// Mon Jan 29 19: 23:07 BRST 2018
+#include "register.h"
 #include "pli.h"
 
 /* tokens */
@@ -98,40 +98,42 @@
 #define TKN_TAB		'\t'
 
 /* category  */
-enum {_COMMENT=0, _OPERAND, _OPERATOR, _DELIMITER, _BLANK, _UNKNOWN};
+enum {
+	_COMMENT = 0, _OPERAND, _OPERATOR, _DELIMITER, _BLANK, _UNKNOWN
+};
 
 /* class - applies to _OPERAND, _OERATOR and _DELIMITER */
-enum {_NUMERIC=1, _ALPHA, _ATTRIBUTION, _LOGIC, _ARITHMETIC,_EOTK, _EOI,_ROUND, _SQUARE,_CURLY};
+enum {
+	_NUMERIC = 1, _ALPHA, _ATTRIBUTION, _LOGIC, _ARITHMETIC, _EOTK, _EOI, _ROUND, _SQUARE, _CURLY
+};
 
 /* type */
-enum {_UNARY=5, _BINARY, _EOL, _EOF, _OPEN, _CLOSE};
+enum {
+	_UNARY = 5, _BINARY, _EOL, _EOF, _OPEN, _CLOSE
+};
 
 /* flgs */
-enum {_PRECEDENCE1=1, _PRECEDENCE2};
+enum {
+	_PRECEDENCE1 = 1, _PRECEDENCE2
+};
 
-#define MAXOPERANDS	 4		/* max number of current operands  <=3 */
-#define MAXOPERATORS	 3		/* max number of current operators <=2 */
+#define MAXOPERANDS	 4	/* max number of current operands  <=3 */
+#define MAXOPERATORS	 3	/* max number of current operators <=2 */
 
-typedef struct _token{
-	char int_t;				/* token char */
-	char _cat;				/* token category */
-	char _cls;				/* token class */
-	char _type;				/* token type */
-	char _flg;				/* aditional information about current token */
-}TOKEN,*TOKENP;
+typedef struct _token {
+	char		int_t;	/* token char */
+	char		_cat;	/* token category */
+	char		_cls;	/* token class */
+	char		_type;	/* token type */
+	char		_flg;	/* aditional information about current token */
+}		TOKEN       , *TOKENP;
 
 #ifndef _OPTIONS_F
 #define _OPTIONS_F
-typedef struct{
-	unsigned h:1;		/* hex output */
-	unsigned q:1;		/* quiet: only numeric output */
-	unsigned d:1;		/* debug purposes */
-	unsigned o:1;		/* octal output */
-}OPTIONS;
+typedef struct {
+	unsigned	h:	1;	/* hex output */
+	unsigned	q:	1;	/* quiet: only numeric output */
+	unsigned	d:	1;	/* debug purposes */
+	unsigned	o:	1;	/* octal output */
+}		OPTIONS;
 #endif
-
-
-
-
-
-
