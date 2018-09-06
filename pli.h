@@ -5,12 +5,13 @@
 #include <stdio.h>
 #include <fcntl.h>
 
-typedef long	BASETYPE;
+typedef long long	BASETYPE;
 
 /* 1. Function Prototypes */
+void usage();
 int		pli_read   ();
 int		readname   (char *p, int lim);
-void		int2str   (int n, char *buf);
+void		int2str   (BASETYPE n, char *buf);
 void		invert    (char *s);
 BASETYPE	read_number(char *p);
 FILE           *pli_open(char *name);
@@ -24,7 +25,7 @@ BASETYPE	push   (BASETYPE n);
 /* 2. Global Constants */
 #define WORDBUFFER	20	/* word buf len in chars */
 #define LINEBUFFER	80	/* line buf len in chars */
-#define MAXNAME	20
+#define MAXNAME	30
 #define MAXLINE	80
 #define	WITH_OPTIONS	1
 #define	NO_OPTIONS	0
@@ -40,11 +41,11 @@ BASETYPE	push   (BASETYPE n);
 #define X_Y_Z	322		/* X or Y or Z */
 /* Global Macros */
 #define NOT2(X)          (1-X)
-#define NOT(X)			(-X-1)
-#define AND(X,Y)        ((X) & (Y))
-#define OR(X,Y)         ((X) | (Y))
-#define IMP(X,Y)        ((NOT(X)) | (Y))
-#define EQV(X,Y)        AND((IMP((X),(Y))),(IMP((Y),(X))))
+#define NOT(X)		(BASETYPE)(-X-1)
+#define AND(X,Y)        (BASETYPE)((X) & (Y))
+#define OR(X,Y)         (BASETYPE)((X) | (Y))
+#define IMP(X,Y)        (BASETYPE)((NOT(X)) | (Y))
+#define EQV(X,Y)        (BASETYPE)AND((IMP((X),(Y))),(IMP((Y),(X))))
 
 #define	SUBJECT1(X,Y)	AND((X),(Y))	/* x & y */
 #define PREDICATE1(X,Y)	EQV((X),(Y))	/* x = y */

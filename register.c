@@ -54,10 +54,10 @@ reg(char *name, char *def)
 	return (as);
 }
 
-char           *
+char *
 store(char *s)
 {
-	char           *ap;
+	char *ap;
 	if ((ap = malloc(strlen(s) + 1)) != NULL)
 		strcpy(ap, s);
 	return (ap);

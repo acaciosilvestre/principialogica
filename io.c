@@ -103,3 +103,40 @@ read_number(char *p)
 	*(p - 1) = '\0';
 	return (v * i);
 }
+
+/* 
+ * 6. int2str: convert integer to string.
+ */
+
+void int2str(BASETYPE n,char *buf)
+{
+    int i,sgn;
+    if((sgn=n)<0)
+	    n=-n;
+ 
+    i=0;
+    do{
+        buf[i++]=n % 10 +'0';
+    }while((n/=10)>0);
+
+    if(sgn<0)
+	    buf[i++]='-';
+
+    buf[i]='\0';
+    invert(buf);
+}
+
+/* 
+ * 7. invert: invert string in s
+ */
+
+void invert(char *s)
+{
+    int c,i,j;
+    for(i=0,j=strlen(s)-1;i<j;i++,j--){
+        c=s[i];
+        s[i]=s[j];
+        s[j]=c;
+    }
+}
+

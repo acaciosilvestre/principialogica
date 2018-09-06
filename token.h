@@ -135,5 +135,7 @@ typedef struct {
 	unsigned	q:	1;	/* quiet: only numeric output */
 	unsigned	d:	1;	/* debug purposes */
 	unsigned	o:	1;	/* octal output */
+	unsigned	H:	1;	/* help */
+	unsigned	n:	1;
 }		OPTIONS;
 #endif

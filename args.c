@@ -31,6 +31,14 @@ parseargs(int argc, char *argv[])
 					f.o = 1;
 					break;
 
+				case 'H':
+					f.H = 1;
+					break;
+
+				case 'n':
+					f.n = 1;
+					break;
+
 				default:
 					break;
 				}
