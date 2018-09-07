@@ -143,6 +143,7 @@ while(!eoi){
 							number+=-1;
 							neg=0;
 			    		}
+						int2str(number,lbuf);
 				        reg(lbuf2,lbuf);
 			    		attrib=0;                                  	
               			break;
