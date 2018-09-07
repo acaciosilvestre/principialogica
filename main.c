@@ -72,6 +72,7 @@ void usage()
 printf("-h	: hexadecimal output\n");
 printf("-o	: octal output\n");
 printf("-q	: quiet mode. only numeric output\n");
-printf("-h	: hexadecimal -d <formula>. read from command line\n");
+printf("-d	: -d <formula>. read from command line\n");
+printf("-H	: help\n");
 exit(0);
 }

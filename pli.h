@@ -31,7 +31,7 @@ BASETYPE	push   (BASETYPE n);
 #define	NO_OPTIONS	0
 #define	__EOI	65536
 #define	___EOI	2828
-#define STACK_LEN	1024
+#define STACK_LEN	2024
 #define TAMHASH 100
 /* configurations */
 #define X	100

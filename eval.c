@@ -98,12 +98,10 @@ while(!eoi){
                	    	ungtc(c);    
                        	sp=search(lbp);
                        	if(sp!=NULL){  
-			char syname[80];
-			strcpy(syname,sp->name);
-//				if(attrib==0 && f.q==0)
-//	    				printf("%s",sp->name); 
-
-                           	number=atoll(sp->def);
+							static char syname[80],sydef[80];
+							strcpy(syname,sp->name);
+							strcpy(sydef,sp->def);
+                           	number=atoll(sydef);
                        		if(denial){           
    	                    		not(number);
    	                    		denial=0;          
@@ -138,12 +136,12 @@ while(!eoi){
 			    		attrib=1;     
 					strcpy(lbuf2,lbuf); 
 
-			    		number=eval(); 
+			    		number=eval();
 			    		if(neg==1){
 							number+=-1;
 							neg=0;
 			    		}
-						int2str(number,lbuf);
+						sprintf(lbuf,"%lld\n",number);
 				        reg(lbuf2,lbuf);
 			    		attrib=0;                                  	
               			break;
