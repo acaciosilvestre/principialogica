@@ -101,7 +101,7 @@ while(!eoi){
 							static char syname[80],sydef[80];
 							strcpy(syname,sp->name);
 							strcpy(sydef,sp->def);
-                           	number=atoll(sydef);
+                           	number=strtoimax(sydef,NULL,0);
                        		if(denial){           
    	                    		not(number);
    	                    		denial=0;          
@@ -141,7 +141,7 @@ while(!eoi){
 							number+=-1;
 							neg=0;
 			    		}
-						sprintf(lbuf,"%lld\n",number);
+						sprintf(lbuf,STRFMT,number);
 				        reg(lbuf2,lbuf);
 			    		attrib=0;                                  	
               			break;

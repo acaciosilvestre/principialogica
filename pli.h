@@ -1,11 +1,12 @@
 #include <ctype.h>
 #include <stdlib.h>
+#include <limits.h>
 #include <string.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <fcntl.h>
 
-typedef long long	BASETYPE;
+typedef unsigned long long	BASETYPE;
 
 /* 1. Function Prototypes */
 void usage();
@@ -23,6 +24,8 @@ BASETYPE	pop    ();
 BASETYPE	push   (BASETYPE n);
 
 /* 2. Global Constants */
+#define STRFMT	"%llu\n"
+#define HSTRFMT	"%llx\n"
 #define WORDBUFFER	20	/* word buf len in chars */
 #define LINEBUFFER	80	/* line buf len in chars */
 #define MAXNAME	30

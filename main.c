@@ -31,6 +31,7 @@ main(int argc, char *argv[])
 	reg("x3","71777214294589695");
 	reg("x4","281470681808895");
 	reg("x5","4294967295");
+	reg("x6","18446744073709551615");	
 
 	mainbuf[0] = '\0';
 	if (f.d == 1) {
@@ -48,11 +49,11 @@ main(int argc, char *argv[])
 			if (f.q == 0)	/* verbose mode */
 				printf(" = ");	/* not end of line yet */
 			if (f.h)
-				printf("%llx\n", ctl.sp->r);
+				printf(HSTRFMT, ctl.sp->r);
 			else if (f.o)
 				printf("%o\n", ctl.sp->r);
 			else
-				printf("%lld\n", ctl.sp->r);
+				printf(STRFMT, ctl.sp->r);
 		}
 		else
 		 ;
