@@ -5,8 +5,8 @@
 
 static BASETYPE	intstack[STACK_LEN];
 static int	oprtstack[STACK_LEN];
-static int intsp=0;
-static int		oprtsp = 0;
+BASETYPE	intsp = 0;
+int		oprtsp = 0;
 
 
 BASETYPE
@@ -19,11 +19,8 @@ push(BASETYPE n)
 BASETYPE
 pop()
 {
-BASETYPE n;
-	if (intsp > 0){
-		n=intstack[--intsp];
-	return(n);
-	}
+	if (intsp > 0)
+		return (intstack[--intsp]);
 	else
 		return (0);
 }

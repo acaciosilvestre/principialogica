@@ -107,12 +107,12 @@ read_number(char *p)
 /* 
  * 6. int2str: convert integer to string.
  */
-/*
-void int2str(BASETYPE n,char *buf)
+
+void int2str(int n,char *buf)
 {
-    int i,sgn=1;
+    int i,sgn;
     if((sgn=n)<0)
-	    n=-1*n;
+	    n=-n;
  
     i=0;
     do{
@@ -126,6 +126,9 @@ void int2str(BASETYPE n,char *buf)
     invert(buf);
 }
 
+/* 
+ * 7. invert: invert string in s
+ */
 
 void invert(char *s)
 {
@@ -136,4 +139,4 @@ void invert(char *s)
         s[j]=c;
     }
 }
-*/
+

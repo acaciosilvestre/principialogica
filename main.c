@@ -8,7 +8,7 @@
 #include "main.h"
 
 int		sigh       ();
-extern OPTIONS	f = {0, 0, 0, 0, 0};
+extern OPTIONS	f = {0, 0, 0, 0};
 int		err_num;
 _main_ctl	ctl = {&ctl, NULL, NULL, pli_open, 0, eval};
 char		mainbuf   [80];
@@ -19,9 +19,6 @@ main(int argc, char *argv[])
 	/* Initialization */
 	signal(SIGUSR1, sigh);
 	parseargs(argc, argv);
-	if(f.H==1)
-	    usage();
-
 	reg("x", "85");
 	reg("y", "51");
 	reg("z", "15");
@@ -31,7 +28,6 @@ main(int argc, char *argv[])
 	reg("x3","71777214294589695");
 	reg("x4","281470681808895");
 	reg("x5","4294967295");
-	reg("x6","18446744073709551615");	
 
 	mainbuf[0] = '\0';
 	if (f.d == 1) {
@@ -49,14 +45,12 @@ main(int argc, char *argv[])
 			if (f.q == 0)	/* verbose mode */
 				printf(" = ");	/* not end of line yet */
 			if (f.h)
-				printf(HSTRFMT, ctl.sp->r);
+				printf("%llx\n", ctl.sp->r);
 			else if (f.o)
-				printf("%o\n", ctl.sp->r);
+				printf("%llo\n", ctl.sp->r);
 			else
-				printf(STRFMT, ctl.sp->r);
+				printf("%lld\n", ctl.sp->r);
 		}
-		else
-		 ;
 	}
 }
 
@@ -64,16 +58,5 @@ int
 sigh()
 {
 	printf("error %s\n", geterrmsg(err_num));
-
 	exit(1);
-}
-
-void usage()
-{
-printf("-h	: hexadecimal output\n");
-printf("-o	: octal output\n");
-printf("-q	: quiet mode. only numeric output\n");
-printf("-d	: -d <formula>. read from command line\n");
-printf("-H	: help\n");
-exit(0);
 }

@@ -44,7 +44,7 @@ while(!eoi){
     c=pli_read();
     col++;
     ret_tk=gettoken(c);
-    /* select by category */
+    /* select returned tken by category */
     switch((ret_tk)?ret_tk->_cat:CATEGORY(c)){
     	case EOF:			
 	    	eoi=1;
@@ -65,11 +65,10 @@ while(!eoi){
 			break;
 
         case _OPERAND:
-            switch(ret_tk->_cls){	
+            switch(ret_tk->_cls){	/* token class */
 				case _NUMERIC:     	
 	    	    	ungtc(c);       
         	    	number=read_number(lbuf); 
-
                     if(denial){ 
             	        not(number);
                         denial=0; /* clear flag */
@@ -92,35 +91,34 @@ while(!eoi){
 	    		case _ALPHA: 
 	        		ungtc(c);
                		readname(lbp,sizeof(lbuf));
-        	        c=pli_read();  
+                    c=pli_read();  
 					/*defined or ...*/
-	      		if(c!=OPRT_ATT){ 
+               		if(c!=OPRT_ATT){ 
                	    	ungtc(c);    
-                       	sp=search(lbp);
-                       	if(sp!=NULL){  
-							static char syname[80],sydef[80];
-							strcpy(syname,sp->name);
-							strcpy(sydef,sp->def);
-                           	number=strtoimax(sydef,NULL,0);
+                       	sp=search(lbp); 
+                       	if(sp!=NULL){
+				char syname[80],sydef[22];
+				strcpy(sydef,sp->def);
+				strcpy(syname,sp->name);
+                           	number=atoll(sydef);
                        		if(denial){           
    	                    		not(number);
    	                    		denial=0;          
-	    				if(attrib==0 && f.q==0)
-	        				printf("~"); 
+			    				if(attrib==0 && f.q==0)
+			        				printf("~"); 
        	                	}
-	
-				if(attrib==0 && f.q==0)
-				    printf("%s",syname);
+							if(attrib==0 && f.q==0)
+			    				printf("%s",syname); 
        	                	push(number); 
        	                	++noprnds;    
 	                    }
-		    		else{
-					exit(1);
+			    		else{
+							exit(1);
         	        	}
                     }
                     else{
                         ungtc(c); 	
-		    	    attrib=1;   
+			    	    attrib=1;   
                     }              	
                     break;
                 }
@@ -134,15 +132,16 @@ while(!eoi){
 						
 					case _ATTRIBUTION:
 			    		attrib=1;     
-					strcpy(lbuf2,lbuf); 
-
-			    		number=eval();
+			    		strcpy(lbuf3,lbuf); 
+			    		number=eval(); 
 			    		if(neg==1){
 							number+=-1;
 							neg=0;
 			    		}
-						sprintf(lbuf,STRFMT,number);
-				        reg(lbuf2,lbuf);
+					sprintf(lbuf2,"%lld",number);
+			    		//strcpy(lbuf,lbuf3); 
+			    		//int2str(number,lbuf2); 
+                	    reg(lbuf3,lbuf2);	                       	
 			    		attrib=0;                                  	
               			break;
               			
@@ -209,8 +208,7 @@ while(!eoi){
     	} 
     	/* 2. Process */
     	config=CONFIG();
-	//printf("\n");
-    	//printf("config %d\n",config); 
+//    	printf("%d\n",config); 
         switch(config){ 
 	    	case   0:
 	    	case 100:  	/* X */
